@@ -1,5 +1,8 @@
 <template>
-  <div>
-    <h2>2023</h2>
-  </div>
+  <v-container>
+    <v-divider />
+    <div style="opacity: 0.3">
+      2023 - Centro Universitario de Occidente
+    </div>
+  </v-container>
 </template>
