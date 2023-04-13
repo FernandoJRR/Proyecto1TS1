@@ -13,6 +13,6 @@
 </template>
 <script setup>
 const { data: secciones } = useFetch(
-  "http://localhost/proyecto-maiz/server-maiz/db_conexion/conexion.php?atributo=secciones"
+  "http://localhost:4500/proyecto-maiz/server-maiz/db_conexion/conexion.php?atributo=secciones"
 );
 </script>
