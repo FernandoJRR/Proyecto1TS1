@@ -5,7 +5,26 @@ switch ($method) {
     echo "Error";
     break;
   case 'POST':
-    echo "Error";
+    header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+    header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+
+    $llaves = array_keys($_POST);
+    $postData = json_decode($llaves[0]);
+
+    if ($postData->tipo != null) {
+      $tipoRequest = $postData->tipo;
+      switch ($tipoRequest) {
+        case 'login':
+          $respuesta = comprobarCredenciales($postData->username, $postData->password);
+          echo $respuesta;
+          break;
+        default:
+          break;
+      }
+    } else {
+      echo "error post";
+    }
     break;
   case 'GET':
     if ($_GET["atributo"] != null) {
@@ -77,11 +96,19 @@ function comprobarCredenciales($user, $pass){
     // Se comprueba si el username existe
     $resultado = $connection->execute_query($sql_query, [$user]);
     if ($resultado->num_rows>0) {
+      //Si existe se comprueba si el password ingresado corresponde al usuario
       $row = $resultado->fetch_assoc();
-      header("HTTP/1.1 200 OK");
-      return json_encode(array('user' => $row["username"], 'password' => $row["password"]));
+      $passProcesado = hasher($pass);
+      $passUsername = $row["password"];
+      if ($passProcesado == $passUsername) {
+        header("HTTP/1.1 200 OK");
+        return json_encode(array('tipo' => $row["tipo"]));
+      } else {
+        header("HTTP/1.1 200 OK");
+        return json_encode(array('error' => "Password incorrecto"));
+      }
     } else {
-      header("HTTP/1.1 401 Unauthorized");
+      header("HTTP/1.1 200 OK");
       return json_encode(array('error' => "Username no existe"));
     }
     return json_encode($secciones_array);

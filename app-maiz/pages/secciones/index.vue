@@ -12,7 +12,6 @@
   </div>
 </template>
 <script setup>
-const { data: secciones } = useFetch(
-  "http://localhost:4500/proyecto-maiz/server-maiz/db_conexion/conexion.php?atributo=secciones"
-);
+const { pending, data: secciones } = useLazyAsyncData('secciones', () => $fetch('http://localhost:4500/proyecto-maiz/server-maiz/db_conexion/conexion.php?atributo=secciones'))
+const refresh = () => refreshNuxtData('secciones')
 </script>
