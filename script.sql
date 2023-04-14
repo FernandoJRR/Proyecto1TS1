@@ -11,6 +11,7 @@ INSERT INTO seccion ( nombre )
   ( 'Ciencia' ),
   ( 'Genetica' ),
   ( 'Cultivo' ),
+  ( 'Miscelanea' ),
   ( 'Historia' );
 
 CREATE TABLE usuario (
@@ -45,10 +46,12 @@ CREATE TABLE articulo (
 INSERT INTO articulo (
   titulo, slug, seccion, fecha, autor, imagen, contenido
 ) VALUES 
-  ( 'Primer Articulo!', 'primer-articulo', 'Ciencia', CURRENT_TIMESTAMP(), 'fernanrod', null, 'Este es el primer articulo escrito para el blog. Esperen mas de nuestros autores!' ),
-  ( 'Sobre uxaq-ixim', 'sobre-uxaq-ixim', 'Ciencia', CURRENT_TIMESTAMP(), 'anaciel', 'sobre-uxaq-ixim.png', 'El blog uxaq ixim (Pagina del Maiz en kiche), es un blog dedicado a publicar y compartir informacion relacionada al maiz' ),
+  ( 'Primer Articulo!', 'primer-articulo', 'Miscelanea', CURRENT_TIMESTAMP(), 'fernanrod', null, 'Este es el primer articulo escrito para el blog. Esperen mas de nuestros autores!' ),
+  ( 'Sobre uxaq-ixim', 'sobre-uxaq-ixim', 'Miscelanea', CURRENT_TIMESTAMP(), 'anaciel', 'sobre-uxaq-ixim.png', 'El blog uxaq ixim (Pagina del Maiz en kiche), es un blog dedicado a publicar y compartir informacion relacionada al maiz' ),
   ( 'Un brevisimo resumen de la historia del maiz', 'brevisima-historia-maiz', 'Historia', CURRENT_TIMESTAMP(), 'fernanrod', null, 'El maiz es una planta originaria de Mesoamerica y en la actualidad es uno de los 3 cultivos basicos para consumo humano.' ),
-  ( 'Sobre el maiz y los mayas', 'sobre-maiz-mayas', 'Cultura', CURRENT_TIMESTAMP(), 'fernanrod', null, 'El maiz es un cultivo base para la alimentacion del pueblo maya hasta la actualidad, sobre este se han construido la religion y cultura maya.' );
+  ( 'Sobre el maiz y los mayas', 'sobre-maiz-mayas', 'Cultura', CURRENT_TIMESTAMP(), 'fernanrod', null, 'El maiz es un cultivo base para la alimentacion del pueblo maya hasta la actualidad, sobre este se han construido la religion y cultura maya.' ),
+  ( 'El maiz, el trigo y el arroz', 'maiz-trigo-arroz', 'Ciencia', CURRENT_TIMESTAMP(), 'anaciel', null, 'Los 3 granos basicos para consumo humano son el maiz, el trigo y el arroz, el primero originario de Mesoamerica, el segundo de Eurasia y el tercero de Asia.' ),
+  ( 'Sobre el cultivo del Maiz', 'sobre-cultivo-maiz', 'Cultivo', CURRENT_TIMESTAMP(), 'anaciel', null, 'Para cultivar el maiz de una manera efectiva es necesario tomar en cuenta una variedad de factores como el clima y en especial la cantidad de humedad ya que esta determina la cantidad de maiz que es optimo plantar por cada hectarea.' );
 
 SELECT * FROM articulo ORDER BY fecha DESC LIMIT 10;
 

@@ -18,7 +18,7 @@
       </div>
     </v-card-text>
     <v-card-actions>
-      <v-btn variant="text" color="teal-accent-4" @click="reveal = true">
+      <v-btn variant="text" color="teal-accent-4" :to="'/articulo/'+slug">
         Ver Articulo
       </v-btn>
     </v-card-actions>
