@@ -35,6 +35,8 @@ switch ($method) {
     } else if ($_GET["articulo"] != null) {
       $articulo = $_GET["articulo"];
       echo getInformacionArticulo($articulo);
+    } else if ($_GET["azar"] != null) {
+      echo articuloAlAzar();
     }
     break;
   default:
@@ -199,6 +201,40 @@ function publicarArticulo($titulo, $slug, $seccion, $contenido, $autor) {
     } catch (\Throwable $th) {
       echo $th;
     }
+  }
+}
+
+function articuloAlAzar() {
+  header('access-control-allow-origin: *');
+  header('content-type: application/json');
+
+  $servidor = "localhost";
+  $username = "root";
+  $password = "";
+  $nombredb = "proyecto_maiz_db";
+
+  $connection = new mysqli($servidor, $username, $password, $nombredb);
+  $sql_query = "select * from articulo ORDER BY RAND() LIMIT 1";
+
+  if ($connection->connect_error) {
+    return json_encode("error de la conexion a la base de datos");
+  } else {
+    $resultado = $connection->execute_query($sql_query);
+    $articulosarray = array();
+    if ($resultado->num_rows>0) {
+      $row = $resultado->fetch_assoc();
+      $articulosarray = array(
+        'titulo' => $row["titulo"], 
+        'slug' => $row["slug"],
+        'seccion' => $row["seccion"],
+        'fecha' => $row["fecha"],
+        'autor' => $row["autor"],
+        'imagen' => $row["imagen"],
+        'contenido' => $row["contenido"]
+      );
+    }
+    header("http/1.1 200 ok");
+    return json_encode($articulosarray);
   }
 }
 ?>
